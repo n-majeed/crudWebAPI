@@ -61,7 +61,7 @@ namespace WebApplication1.Controllers
             return Ok(students);
         }
 
-      /* [HttpPatch]
+      [HttpPut]
         public IActionResult EditStudent(int id, Student stdnt)
         {
             var existingStudent = students.SingleOrDefault(x => x.id == id);
@@ -69,18 +69,19 @@ namespace WebApplication1.Controllers
             {
                 return NotFound("No Student with this id found");
             }
-            return existingStudent.editStudent(id,stdnt);
+            else {
+                students.Remove(existingStudent);
+                //existingStudent = students.SingleOrDefault(x => x.id == id);
+                existingStudent.id = stdnt.id;
+                existingStudent.name = stdnt.name;
+                existingStudent.rollNo = stdnt.rollNo;
+                existingStudent.marks = stdnt.marks;
+                students.Add(existingStudent);
+               
+            }
+            return Ok(students);
         }
 
-      public Student editStudent(int id,Student stdnt) {
-            var existingStudent = students.SingleOrDefault(x => x.id == id);
-            existingStudent.id = stdnt.id;
-            existingStudent.name = stdnt.name;
-            existingStudent.rollNo = stdnt.rollNo;
-            existingStudent.marks = stdnt.marks;
-
-            return existingStudent;
-        }*/ 
     }
   }
 
